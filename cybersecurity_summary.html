@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ملخص دبلوم الأمن السيبراني</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-dark: #0a0e1a;
+  --bg-card: #111827;
+  --bg-card-hover: #1a2340;
+  --accent-cyan: #06d6a0;
+  --accent-blue: #118ab2;
+  --accent-purple: #8338ec;
+  --accent-orange: #ff6b35;
+  --accent-pink: #ef476f;
+  --accent-gold: #ffd166;
+  --text-primary: #e8ecf1;
+  --text-secondary: #9ca3af;
+  --glass: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.8;
+}
+
+/* Animated background */
+.bg-animation {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+.bg-animation .orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  animation: float 20s ease-in-out infinite;
+}
+.orb:nth-child(1) { width:600px; height:600px; background:var(--accent-purple); top:-10%; right:-10%; animation-delay:0s; }
+.orb:nth-child(2) { width:500px; height:500px; background:var(--accent-cyan); bottom:10%; left:-5%; animation-delay:-7s; }
+.orb:nth-child(3) { width:400px; height:400px; background:var(--accent-blue); top:50%; right:30%; animation-delay:-14s; }
+
+@keyframes float {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(40px,-30px) scale(1.05); }
+  66% { transform: translate(-20px,40px) scale(0.95); }
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 60px 20px 40px;
+  animation: fadeInUp 1s ease;
+}
+.hero-icon {
+  width: 90px; height: 90px;
+  margin: 0 auto 24px;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  border-radius: 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 42px;
+  animation: pulse-glow 3s ease-in-out infinite;
+  box-shadow: 0 0 40px rgba(6,214,160,0.3);
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 40px rgba(6,214,160,0.3); }
+  50% { box-shadow: 0 0 60px rgba(131,56,236,0.4); }
+}
+.hero h1 {
+  font-family: 'Cairo', sans-serif;
+  font-size: 2.4em;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-gold), var(--accent-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+}
+.hero p {
+  color: var(--text-secondary);
+  font-size: 1.1em;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Navigation Tabs */
+.nav-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 30px 0;
+  padding: 10px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,14,26,0.97);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.nav-tab {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  background: var(--glass);
+  color: var(--text-secondary);
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.9em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: rgba(6,214,160,0.3);
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.nav-tab:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--text-primary);
+}
+.nav-tab.active {
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(6,214,160,0.3);
+}
+.nav-tab[data-tab="intro"].active { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue)); }
+.nav-tab[data-tab="hardware"].active { background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); }
+.nav-tab[data-tab="networks"].active { background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink)); }
+.nav-tab[data-tab="encryption"].active { background: linear-gradient(135deg, var(--accent-orange), var(--accent-gold)); }
+.nav-tab[data-tab="word"].active { background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); }
+.nav-tab[data-tab="excel"].active { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-gold)); }
+
+/* Section */
+.section {
+  display: none;
+  animation: fadeInUp 0.5s ease;
+}
+.section.active { display: block; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.section-header .badge {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 30px;
+  font-size: 0.85em;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.section-header h2 {
+  font-family: 'Cairo', sans-serif;
+  font-size: 2em;
+  font-weight: 900;
+}
+
+/* Cards */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 28px;
+  margin-bottom: 20px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; left: auto;
+  width: 4px; height: 100%;
+  border-radius: 20px 0 0 20px;
+  transition: height 0.4s ease;
+}
+.card:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+.card-title {
+  font-family: 'Cairo', sans-serif;
+  font-size: 1.3em;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.card-title .icon {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.card-body { color: var(--text-secondary); font-size: 1em; }
+.card-body strong { color: var(--accent-cyan); font-weight: 700; }
+
+/* Highlight boxes */
+.highlight-box {
+  background: rgba(6,214,160,0.08);
+  border: 1px solid rgba(6,214,160,0.2);
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin: 14px 0;
+}
+.highlight-box.purple { background: rgba(131,56,236,0.08); border-color: rgba(131,56,236,0.2); }
+.highlight-box.orange { background: rgba(255,107,53,0.08); border-color: rgba(255,107,53,0.2); }
+.highlight-box.pink { background: rgba(239,71,111,0.08); border-color: rgba(239,71,111,0.2); }
+.highlight-box.gold { background: rgba(255,209,102,0.08); border-color: rgba(255,209,102,0.2); }
+
+/* Triangle diagram */
+.cia-triangle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.cia-item {
+  width: 160px;
+  padding: 22px 16px;
+  border-radius: 18px;
+  text-align: center;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+.cia-item:hover { transform: scale(1.08); }
+.cia-item .cia-icon { font-size: 36px; margin-bottom: 8px; }
+.cia-item .cia-en { font-size: 0.8em; opacity: 0.7; margin-top: 4px; }
+
+/* List items */
+.info-list {
+  list-style: none;
+  padding: 0;
+}
+.info-list li {
+  padding: 10px 16px;
+  margin: 6px 0;
+  border-radius: 12px;
+  background: var(--glass);
+  border-right: 3px solid var(--accent-cyan);
+  border-left: none;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: right;
+}
+.info-list li:hover {
+  background: rgba(255,255,255,0.06);
+  transform: translateX(4px);
+}
+.info-list li .li-icon { flex-shrink: 0; font-size: 1.1em; margin-top: 2px; }
+
+/* Topology cards grid */
+.topo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+.topo-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+.topo-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.06); }
+.topo-card .topo-icon { font-size: 40px; margin-bottom: 10px; }
+.topo-card h4 { font-family: 'Cairo', sans-serif; font-weight: 700; margin-bottom: 6px; }
+.topo-card p { font-size: 0.88em; color: var(--text-secondary); }
+
+/* Network type pills */
+.net-types {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0;
+}
+.net-pill {
+  padding: 14px 24px;
+  border-radius: 16px;
+  text-align: center;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  min-width: 150px;
+}
+.net-pill span { display: block; font-size: 0.82em; font-weight: 400; opacity: 0.8; margin-top: 4px; }
+
+/* Encryption algo chips */
+.algo-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0;
+}
+.algo-chip {
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 600;
+  font-size: 0.9em;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+.algo-chip:hover { transform: scale(1.08); }
+
+/* Accordion */
+.accordion-item {
+  margin: 10px 0;
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+.accordion-header {
+  padding: 16px 22px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  font-size: 1.05em;
+  transition: all 0.3s ease;
+  gap: 12px;
+  -webkit-tap-highlight-color: rgba(6,214,160,0.2);
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.accordion-header:hover { background: var(--bg-card-hover); }
+.accordion-header .arrow {
+  transition: transform 0.3s ease;
+  font-size: 0.8em;
+  order: -1;
+}
+.accordion-item.open .accordion-header .arrow { transform: rotate(180deg); }
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  padding: 0 22px;
+  color: var(--text-secondary);
+}
+.accordion-item.open .accordion-content {
+  max-height: 2000px;
+  padding: 0 22px 18px;
+}
+
+/* Color themes per section */
+[data-theme="cyan"] .card::before { background: var(--accent-cyan); }
+[data-theme="purple"] .card::before { background: var(--accent-purple); }
+[data-theme="pink"] .card::before { background: var(--accent-pink); }
+[data-theme="orange"] .card::before { background: var(--accent-orange); }
+[data-theme="blue"] .card::before { background: var(--accent-blue); }
+[data-theme="gold"] .card::before { background: var(--accent-gold); }
+
+/* Progress bar */
+.progress-bar {
+  position: fixed;
+  top: 0; right: 0; left: auto;
+  height: 3px;
+  background: linear-gradient(270deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
+  z-index: 9999;
+  transition: width 0.3s ease;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+  font-size: 0.9em;
+  border-top: 1px solid var(--glass-border);
+  margin-top: 40px;
+}
+
+/* RTL-specific fixes */
+html[dir="rtl"] .card-title,
+html[dir="rtl"] .info-list li,
+html[dir="rtl"] .accordion-header {
+  direction: rtl;
+}
+html[dir="rtl"] .nav-tabs {
+  direction: rtl;
+}
+html[dir="rtl"] .card::before {
+  right: 0; left: auto;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.7em; }
+  .nav-tab { padding: 8px 14px; font-size: 0.8em; }
+  .card { padding: 20px; }
+  .cia-item { width: 130px; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="bg-animation">
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+</div>
+
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-icon">🛡️</div>
+    <h1>ملخص دبلوم الأمن السيبراني</h1>
+    <p>مراجعة شاملة لجميع المواد وأبرز النقاط المهمة للتحضير للاختبار الشامل</p>
+  </div>
+
+  <!-- Navigation -->
+  <div class="nav-tabs">
+    <button class="nav-tab active" data-tab="intro">🔐 مقدمة الأمن السيبراني</button>
+    <button class="nav-tab" data-tab="hardware">🖥️ تجميع الحاسب</button>
+    <button class="nav-tab" data-tab="networks">🌐 الشبكات</button>
+    <button class="nav-tab" data-tab="encryption">🔑 التشفير</button>
+    <button class="nav-tab" data-tab="word">📝 مايكروسوفت وورد</button>
+    <button class="nav-tab" data-tab="excel">📊 مايكروسوفت إكسل</button>
+  </div>
+
+  <!-- ==================== مقدمة الأمن السيبراني ==================== -->
+  <div class="section active" id="intro" data-theme="cyan">
+    <div class="section-header">
+      <div class="badge" style="background:rgba(6,214,160,0.15);color:var(--accent-cyan);">المادة الأولى</div>
+      <h2 style="color:var(--accent-cyan);">مقدمة في الأمن السيبراني</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(6,214,160,0.15);color:var(--accent-cyan);">🛡️</div>
+        تعريف أمن الكمبيوتر (Computer Security)
+      </div>
+      <div class="card-body">
+        هو حماية أنظمة وشبكات الكمبيوتر من <strong>السرقة</strong> أو <strong>تلف الأجهزة والبرامج والبيانات</strong>، وكذلك الحماية من تعطيل الخدمات أو تضليلها. ويُسمى أيضاً بالأمن السيبراني أو أمن تقنية المعلومات.
+        <div class="highlight-box" style="margin-top:16px;">
+          <strong>أمن الشبكات:</strong> تأمين شبكة الكمبيوتر من المتطفلين سواء مهاجمين أو برامج ضارة<br>
+          <strong>أمن التطبيقات:</strong> إبقاء البرامج والأجهزة خالية من التهديدات<br>
+          <strong>أمن المعلومات:</strong> سلامة وخصوصية البيانات سواء في التخزين أو أثناء النقل
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(131,56,236,0.15);color:var(--accent-purple);">🔺</div>
+        المثلث الأمني (CIA Triad)
+      </div>
+      <div class="card-body">
+        يُعتبر نموذج رئيسي للأمن السيبراني ويركز على حماية المعلومات والبيانات:
+        <div class="cia-triangle">
+          <div class="cia-item" style="background:rgba(6,214,160,0.12);border:2px solid rgba(6,214,160,0.3);">
+            <div class="cia-icon">🔒</div>
+            السرية
+            <div class="cia-en">Confidentiality</div>
+          </div>
+          <div class="cia-item" style="background:rgba(17,138,178,0.12);border:2px solid rgba(17,138,178,0.3);">
+            <div class="cia-icon">✅</div>
+            النزاهة
+            <div class="cia-en">Integrity</div>
+          </div>
+          <div class="cia-item" style="background:rgba(131,56,236,0.12);border:2px solid rgba(131,56,236,0.3);">
+            <div class="cia-icon">⚡</div>
+            التوافر
+            <div class="cia-en">Availability</div>
+          </div>
+        </div>
+        <div class="highlight-box">
+          <strong>السرية:</strong> ضمان وصول المعلومات فقط للأشخاص المصرح لهم
+        </div>
+        <div class="highlight-box purple">
+          <strong>النزاهة:</strong> الحفاظ على تناسق ودقة البيانات والتأكد من عدم تغييرها
+        </div>
+        <div class="highlight-box gold">
+          <strong>التوافر:</strong> البيانات والخدمات متوفرة عند الحاجة إليها بأي وقت
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(239,71,111,0.15);color:var(--accent-pink);">⚠️</div>
+        عناصر حدوث الاختراق
+      </div>
+      <div class="card-body">
+        <div class="topo-grid">
+          <div class="topo-card" style="border-right:3px solid var(--accent-pink);">
+            <div class="topo-icon">🔧</div>
+            <h4>الطريقة</h4>
+            <p>كيف سيتم الهجوم؟</p>
+          </div>
+          <div class="topo-card" style="border-right:3px solid var(--accent-orange);">
+            <div class="topo-icon">⏰</div>
+            <h4>الفرصة</h4>
+            <p>متى سيتم الهجوم؟</p>
+          </div>
+          <div class="topo-card" style="border-right:3px solid var(--accent-purple);">
+            <div class="topo-icon">🎯</div>
+            <h4>الدافع</h4>
+            <p>ما هو سبب الهجوم؟</p>
+          </div>
+        </div>
+        <div class="highlight-box pink">
+          💡 إذا حرمت المخترق أي من هذه العناصر الثلاثة <strong>فلن ينجح الهجوم</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(255,209,102,0.15);color:var(--accent-gold);">🔑</div>
+        المصادقة (Authentication)
+      </div>
+      <div class="card-body">
+        للتحقق من المستخدم يحتاج النظام لخطوتين: <strong>الهوية</strong> (مثل اسم المستخدم) و<strong>المصادقة</strong> (مثل الرقم السري).
+        <ul class="info-list" style="margin-top:14px;">
+          <li><span class="li-icon">🔐</span> <strong>شيء تعرفه:</strong> كلمة المرور أو رسالة التفعيل</li>
+          <li><span class="li-icon">👆</span> <strong>شيء حيوي:</strong> بصمة الوجه أو الإصبع (الأكثر أماناً)</li>
+          <li><span class="li-icon">💳</span> <strong>شيء تملكه:</strong> بطاقة الصراف أو كرت فتح الأبواب</li>
+        </ul>
+        <div class="highlight-box" style="margin-top:14px;">
+          القياسات الحيوية <strong>أكثر أماناً</strong> من كلمات المرور لأنها لا يمكن نسيانها أو سرقتها أو مشاركتها
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(255,107,53,0.15);color:var(--accent-orange);">🐛</div>
+        التهديدات الأمنية والثغرات
+      </div>
+      <div class="card-body">
+        <div class="highlight-box orange">
+          <strong>التهديدات الأمنية:</strong> مشاكل أمنية في نظام التشغيل قد تسبب تعطيل أو ضرر في النظام والخوادم والشبكات. يمكن أن تكون <strong>متعمدة أو غير مقصودة</strong>.
+        </div>
+        <div class="highlight-box pink" style="margin-top:10px;">
+          <strong>الثغرة الأمنية (Vulnerability):</strong> ضعف في أمان نظام الكمبيوتر سواء في الإجراءات أو التصميم أو التنفيذ، والتي قد يتم استغلالها لإحداث خسارة أو ضرر.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(17,138,178,0.15);color:var(--accent-blue);">🔓</div>
+        نموذج التحكم في الوصول
+      </div>
+      <div class="card-body">
+        <ul class="info-list">
+          <li><span class="li-icon">👤</span> <strong>الموضوعات (Subjects):</strong> المستخدمون البشريون أو البرامج البديلة</li>
+          <li><span class="li-icon">📁</span> <strong>الكائنات (Objects):</strong> الملفات والجداول والبرامج والأجهزة</li>
+          <li><span class="li-icon">⚙️</span> <strong>أوضاع الوصول:</strong> القراءة والكتابة والتعديل والحذف والتنفيذ</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== تجميع الحاسب ==================== -->
+  <div class="section" id="hardware" data-theme="purple">
+    <div class="section-header">
+      <div class="badge" style="background:rgba(131,56,236,0.15);color:var(--accent-purple);">المادة الثانية</div>
+      <h2 style="color:var(--accent-purple);">تجميع الحاسب وتشغيله</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(131,56,236,0.15);color:var(--accent-purple);">💻</div>
+        تعريف الكمبيوتر
+      </div>
+      <div class="card-body">
+        جهاز إلكتروني يقوم بـ<strong>إدخال البيانات</strong> ← <strong>معالجتها</strong> ← <strong>تحويلها لمعلومات</strong> تُخزن أو تُخرج. يستخدم <strong>النظام الثنائي (Binary System)</strong> لحفظ البيانات.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(6,214,160,0.15);color:var(--accent-cyan);">🧩</div>
+        مكونات الكمبيوتر
+      </div>
+      <div class="card-body">
+        <div class="highlight-box purple">
+          <strong>المكونات البرمجية (Software):</strong><br>
+          ① <strong>برمجيات تطبيقية:</strong> مثل متصفحات الويب والألعاب وبرامج تحرير الصور<br>
+          ② <strong>برمجيات النظام:</strong> تُشكل القاعدة لغيرها من البرمجيات وتوفر الخدمات لها
+        </div>
+        <div class="highlight-box" style="margin-top:12px;">
+          <strong>المكونات المادية (Hardware):</strong>
+        </div>
+        <ul class="info-list" style="margin-top:10px;">
+          <li><span class="li-icon">🟢</span> <strong>اللوحة الأم (Motherboard):</strong> بيئة الاتصالات الأساسية لجميع المكونات</li>
+          <li><span class="li-icon">🧠</span> <strong>المعالج (CPU):</strong> العقل المدبر – ينفذ ويتحكم في البرامج والأنظمة</li>
+          <li><span class="li-icon">⚡</span> <strong>ذاكرة RAM:</strong> مخزن مؤقت وسريع تزول بياناته عند إطفاء الجهاز</li>
+          <li><span class="li-icon">💾</span> <strong>SSD:</strong> أسرع وحدات التخزين الدائم</li>
+          <li><span class="li-icon">🗄️</span> <strong>Hard Disk:</strong> سعة كبيرة، يأتي بعد SSD بالسرعة</li>
+          <li><span class="li-icon">🔌</span> <strong>مزود الطاقة:</strong> يوزع التيار الكهربائي ويبرد المكونات</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(255,107,53,0.15);color:var(--accent-orange);">⌨️</div>
+        وحدات الإدخال والإخراج
+      </div>
+      <div class="card-body">
+        <div class="topo-grid">
+          <div class="topo-card" style="border-top:3px solid var(--accent-cyan);">
+            <h4 style="color:var(--accent-cyan);">وحدات الإدخال</h4>
+            <p>لوحة المفاتيح ، الفأرة ، الميكروفون ، الكاميرا ، الماسح الضوئي ، قارئ الباركود</p>
+          </div>
+          <div class="topo-card" style="border-top:3px solid var(--accent-orange);">
+            <h4 style="color:var(--accent-orange);">وحدات الإخراج</h4>
+            <p>الشاشة ، الطابعة ، مكبرات الصوت</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(239,71,111,0.15);color:var(--accent-pink);">📱</div>
+        الأجهزة المحمولة واللوحية
+      </div>
+      <div class="card-body">
+        <div class="highlight-box pink">
+          <strong>الفرق بين الكمبيوتر المحمول والجهاز اللوحي:</strong><br>
+          • اللوحي للأعمال الترفيهية، المحمول لكل الأغراض<br>
+          • أداء المحمول أعلى من اللوحي بنفس السعر<br>
+          • المحمول أفضل بالإنتاجية مثل كتابة النصوص
+        </div>
+        <div class="highlight-box gold" style="margin-top:10px;">
+          <strong>أمثلة على الأجهزة اللوحية:</strong><br>
+          • <strong>iPad:</strong> يعمل بنظام iOS المبني على نواة يونكس<br>
+          • <strong>Samsung Galaxy Tab:</strong> يعمل بنظام أندرويد
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(255,209,102,0.15);color:var(--accent-gold);">🖨️</div>
+        أنواع الطابعات
+      </div>
+      <div class="card-body">
+        <div class="topo-grid">
+          <div class="topo-card"><div class="topo-icon">💧</div><h4>نفث الحبر</h4><p>ترش نقط حبر سائل على الورق</p></div>
+          <div class="topo-card"><div class="topo-icon">📸</div><h4>طابعة الصور</h4><p>مصممة لطباعة صور بجودة عالية</p></div>
+          <div class="topo-card"><div class="topo-icon">⚡</div><h4>الليزر</h4><p>سرعة مرتفعة وإنتاج عالي الجودة</p></div>
+          <div class="topo-card"><div class="topo-icon">🔥</div><h4>الحرارية</h4><p>تطبع فواتير المتاجر والأسواق</p></div>
+          <div class="topo-card"><div class="topo-icon">📦</div><h4>الباركود</h4><p>تطبع شفرة تعريف المنتجات</p></div>
+          <div class="topo-card"><div class="topo-icon">🧳</div><h4>المحمولة</h4><p>خفيفة تعمل بالبطاريات</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== الشبكات ==================== -->
+  <div class="section" id="networks" data-theme="pink">
+    <div class="section-header">
+      <div class="badge" style="background:rgba(239,71,111,0.15);color:var(--accent-pink);">مفاهيم الشبكات</div>
+      <h2 style="color:var(--accent-pink);">الشبكات</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(239,71,111,0.15);color:var(--accent-pink);">🌐</div>
+        تعريف وفوائد الشبكات
+      </div>
+      <div class="card-body">
+        عبارة عن جهازي كمبيوتر أو أكثر <strong>متصلة ببعضها</strong> بواسطة أسلاك التوصيل.
+        <ul class="info-list" style="margin-top:14px;">
+          <li><span class="li-icon">🖨️</span> ربط الأجهزة المختلفة ببعضها (مثل مشاركة طابعة واحدة)</li>
+          <li><span class="li-icon">⏱️</span> توفير الوقت والجهد في نقل البيانات</li>
+          <li><span class="li-icon">🗄️</span> إنشاء قواعد بيانات مركزية مشتركة</li>
+          <li><span class="li-icon">🌍</span> الاتصال بالإنترنت من أي مكان</li>
+          <li><span class="li-icon">🔐</span> تحسين الأمان بتوزيع الصلاحيات والأذونات</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(17,138,178,0.15);color:var(--accent-blue);">📡</div>
+        أنواع الشبكات حسب المساحة الجغرافية
+      </div>
+      <div class="card-body">
+        <div class="net-types">
+          <div class="net-pill" style="background:rgba(6,214,160,0.12);border:2px solid rgba(6,214,160,0.25);">
+            🏠 LAN
+            <span>شبكة محلية<br>مثل مكتب أو منزل</span>
+          </div>
+          <div class="net-pill" style="background:rgba(17,138,178,0.12);border:2px solid rgba(17,138,178,0.25);">
+            🏙️ MAN
+            <span>شبكة مدنية<br>تغطي مدينة كاملة</span>
+          </div>
+          <div class="net-pill" style="background:rgba(131,56,236,0.12);border:2px solid rgba(131,56,236,0.25);">
+            🌍 WAN
+            <span>شبكة واسعة<br>مثل الإنترنت العالمية</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(255,209,102,0.15);color:var(--accent-gold);">🔗</div>
+        أشكال (طوبولوجيا) الشبكات
+      </div>
+      <div class="card-body">
+        <div class="topo-grid">
+          <div class="topo-card" style="border-top:3px solid var(--accent-gold);">
+            <div class="topo-icon">⭐</div>
+            <h4>النجمة (Star)</h4>
+            <p>كل جهاز متصل بالجهاز الرئيسي مباشرة. عيبها: إذا توقف الرئيسي تتوقف كلها.</p>
+          </div>
+          <div class="topo-card" style="border-top:3px solid var(--accent-cyan);">
+            <div class="topo-icon">🕸️</div>
+            <h4>الشبكي (Mesh)</h4>
+            <p>الأفضل أداءً وسرعة. كل جهاز متصل بجميع الأجهزة الأخرى. تكلفته عالية.</p>
+          </div>
+          <div class="topo-card" style="border-top:3px solid var(--accent-orange);">
+            <div class="topo-icon">➡️</div>
+            <h4>الخطي (Bus)</h4>
+            <p>الأقدم. أجهزة متصلة بخط رئيسي واحد. لا يُسمح بتبادل أكثر من جهازين في آن واحد.</p>
+          </div>
+          <div class="topo-card" style="border-top:3px solid var(--accent-purple);">
+            <div class="topo-icon">🔄</div>
+            <h4>الحلقي (Ring)</h4>
+            <p>كل جهاز متصل بالذي قبله والذي بعده في دائرة مغلقة. الإرسال باتجاه واحد فقط.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== التشفير ==================== -->
+  <div class="section" id="encryption" data-theme="orange">
+    <div class="section-header">
+      <div class="badge" style="background:rgba(255,107,53,0.15);color:var(--accent-orange);">المادة الثالثة</div>
+      <h2 style="color:var(--accent-orange);">التشفير (Encryption)</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(255,107,53,0.15);color:var(--accent-orange);">🔑</div>
+        مفاهيم التشفير الأساسية
+      </div>
+      <div class="card-body">
+        <ul class="info-list">
+          <li><span class="li-icon">🔐</span> <strong>التشفير (Encryption):</strong> تحويل الحروف والأرقام لرموز أخرى لحماية الرسالة</li>
+          <li><span class="li-icon">🔓</span> <strong>فك التشفير (Decryption):</strong> عملية عكسية لإعادة النص لطبيعته الأصلية</li>
+          <li><span class="li-icon">📄</span> <strong>النص الأصلي (Plaintext):</strong> النص قبل تشفيره</li>
+          <li><span class="li-icon">🔣</span> <strong>النص المشفر (Ciphertext):</strong> النص بعد تشفيره</li>
+          <li><span class="li-icon">⚙️</span> <strong>نظام التشفير (Cryptosystem):</strong> عملية التشفير وفك التشفير معاً</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(255,209,102,0.15);color:var(--accent-gold);">🔀</div>
+        أنواع التشفير
+      </div>
+      <div class="card-body">
+        <div class="topo-grid">
+          <div class="topo-card" style="border-top:3px solid var(--accent-cyan);">
+            <div class="topo-icon">🔑</div>
+            <h4>التشفير المتناظر</h4>
+            <p>يستخدم <strong>مفتاح سري واحد</strong> للتشفير وفك التشفير</p>
+          </div>
+          <div class="topo-card" style="border-top:3px solid var(--accent-purple);">
+            <div class="topo-icon">🔑🔑</div>
+            <h4>التشفير غير المتناظر</h4>
+            <p>يستخدم <strong>مفتاح عام + مفتاح سري</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="icon" style="background:rgba(131,56,236,0.15);color:var(--accent-purple);">⚙️</div>
+        أشهر خوارزميات التشفير
+      </div>
+      <div class="card-body">
+        <div class="algo-chips">
+          <div class="algo-chip" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">Caesar (قيصر)</div>
+          <div class="algo-chip" style="border-color:var(--accent-purple);color:var(--accent-purple);">One Time Pad</div>
+          <div class="algo-chip" style="border-color:var(--accent-orange);color:var(--accent-orange);">DES</div>
+          <div class="algo-chip" style="border-color:var(--accent-pink);color:var(--accent-pink);">RSA</div>
+          <div class="algo-chip" style="border-color:var(--accent-gold);color:var(--accent-gold);">AES</div>
+          <div class="algo-chip" style="border-color:var(--accent-blue);color:var(--accent-blue);">MD5</div>
+          <div class="algo-chip" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">SHA1</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== مايكروسوفت وورد ==================== -->
+  <div class="section" id="word" data-theme="blue">
+    <div class="section-header">
+      <div class="badge" style="background:rgba(17,138,178,0.15);color:var(--accent-blue);">تطبيقات الحاسب</div>
+      <h2 style="color:var(--accent-blue);">مايكروسوفت وورد (Word)</h2>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>📄 إنشاء المستندات وعرضها</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-content">
+        <ul class="info-list">
+          <li><span class="li-icon">1️⃣</span> فتح Word ← ملف ← جديد ← اختيار قالب أو مستند فارغ</li>
+          <li><span class="li-icon">2️⃣</span> كتابة المحتوى باستخدام أدوات التنسيق المتاحة</li>
+          <li><span class="li-icon">3️⃣</span> حفظ: ملف ← حفظ / حفظ باسم ← اختيار المكان والامتداد (.docx)</li>
+          <li><span class="li-icon">4️⃣</span> لعرض مستند: ملف ← فتح ← تحديد الملف</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>✏️ تنسيق النص</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-content">
+        <ul class="info-list">
+          <li><span class="li-icon">🔤</span> تغيير نوع الخط وحجمه من تبويب "البداية"</li>
+          <li><span class="li-icon">🎨</span> تلوين النص باستخدام أيقونة "لون النص"</li>
+          <li><span class="li-icon">📐</span> التسطير والتصغير والتوسيط</li>
+          <li><span class="li-icon">📋</span> إنشاء قوائم تعاقبية أو رقمية</li>
+          <li><span class="li-icon">✂️</span> القص والنسخ واللصق (كليك يمين)</li>
+          <li><span class="li-icon">⌨️</span> Ctrl+A لتحديد النص بالكامل</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>🖼️ إدراج الصور والرسومات</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-content">
+        <ul class="info-list">
+          <li><span class="li-icon">📥</span> تبويب "إدراج" ← أيقونة "صورة" ← اختيار الصورة ← إدراج</li>
+          <li><span class="li-icon">🔄</span> نقر مزدوج على الصورة لفتح تبويب "تنسيق" لتعديلها</li>
+          <li><span class="li-icon">📏</span> تغيير الحجم بسحب الزوايا / التدوير بالدائرة العلوية</li>
+          <li><span class="li-icon">🎛️</span> ضبط التباين والسطوع من أدوات "تصحيح الصورة"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>🔍 البحث والاستبدال</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-content">
+        <ul class="info-list">
+          <li><span class="li-icon">🔎</span> تبويب "البداية" ← أيقونة "استبدال" في مجموعة "التحرير"</li>
+          <li><span class="li-icon">📝</span> كتابة النص المراد البحث عنه في مربع "البحث عن"</li>
+          <li><span class="li-icon">🔄</span> كتابة النص الجديد في مربع "استبدال بـ"</li>
+          <li><span class="li-icon">✅</span> خيارات: البحث في كل الوثيقة / تطابق الحالة / كلمات كاملة</li>
+          <li><span class="li-icon">⚡</span> "استبدال الكل" لاستبدال جميع التكرارات دفعة واحدة</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>📊 إنشاء الجداول</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-content">
+        <ul class="info-list">
+          <li><span class="li-icon">➕</span> تبويب "إدراج" ← أيقونة "جدول" ← تحديد الصفوف والأعمدة</li>
+          <li><span class="li-icon">📎</span> إضافة/حذف صفوف وأعمدة بالنقر اليمين</li>
+          <li><span class="li-icon">🔗</span> دمج الخلايا: تحديد ← كليك يمين ← "دمج الخلايا"</li>
+          <li><span class="li-icon">✂️</span> تقسيم خلية: تحديد ← كليك يمين ← "تقسيم الخلية"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>🔗 إنشاء الارتباطات والمراجع</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-content">
+        <ul class="info-list">
+          <li><span class="li-icon">📎</span> تحديد النص ← تبويب "إدراج" ← أيقونة "ارتباط"</li>
+          <li><span class="li-icon">📄</span> للربط بمستند آخر: اختر "وثيقة" ثم حدد المستند</li>
+          <li><span class="li-icon">🌐</span> للربط بموقع ويب: الصق عنوان URL في مربع "عنوان"</li>
+          <li><span class="li-icon">📚</span> المراجع: تبويب "المراجع" ← "إدراج مرجع" ← اختيار النمط (APA, MLA, Chicago)</li>
+          <li><span class="li-icon">📋</span> إنشاء قائمة المراجع: تبويب "المراجع" ← "إدراج قائمة المراجع"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>⚙️ تخصيص وظائف وورد</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-content">
+        <ul class="info-list">
+          <li><span class="li-icon">🔧</span> <strong>شريط الأدوات:</strong> كليك يمين ← "تخصيص الشريط" لإضافة/إزالة الأوامر</li>
+          <li><span class="li-icon">🌍</span> <strong>اللغة والتوجيه:</strong> دعم لغات متعددة واتجاه الكتابة (يمين لليسار)</li>
+          <li><span class="li-icon">🖨️</span> <strong>إعدادات الطباعة:</strong> الحجم، الهوامش، جودة الطباعة، توجيه الورق</li>
+          <li><span class="li-icon">🔐</span> <strong>الأمان والخصوصية:</strong> حماية المستندات ومنع الوصول غير المصرح</li>
+          <li><span class="li-icon">📋</span> <strong>القوالب:</strong> إنشاء وتخصيص قوالب خاصة بالخطوط والألوان</li>
+          <li><span class="li-icon">📖</span> <strong>القواميس:</strong> إضافة قواميس إضافية للتحقق من الإملاء والنحو</li>
+          <li><span class="li-icon">⌨️</span> <strong>أوامر الاختصار:</strong> تخصيص اختصارات لوحة المفاتيح</li>
+          <li><span class="li-icon">🧩</span> <strong>الإضافات (Add-Ins):</strong> تثبيت إضافات لتوسيع وظائف Word</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>🖨️ حفظ المستندات وطباعتها</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-content">
+        <ul class="info-list">
+          <li><span class="li-icon">💾</span> حفظ: ملف ← حفظ (للتحديث) أو حفظ باسم (لتحديد المكان والاسم)</li>
+          <li><span class="li-icon">🖨️</span> طباعة: ملف ← طباعة ← اختيار الطابعة وعدد النسخ</li>
+          <li><span class="li-icon">👁️</span> زر "استعراض" لمعاينة الصفحات قبل الطباعة</li>
+          <li><span class="li-icon">📃</span> تحديد إعدادات الطباعة ثم الضغط على "طباعة"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>📋 إنشاء قوائم التعداد</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-content">
+        <ul class="info-list">
+          <li><span class="li-icon">🔢</span> تبويب "البداية" ← أيقونة "تعداد" في مجموعة "فقرة"</li>
+          <li><span class="li-icon">🎨</span> اختيار نمط الرقم من القائمة المنسدلة</li>
+          <li><span class="li-icon">↩️</span> اضغط Enter لإنشاء عنصر جديد في القائمة</li>
+          <li><span class="li-icon">🔀</span> تغيير الترتيب بأزرار السهم (صعود/هبوط) في شريط الأدوات</li>
+          <li><span class="li-icon">🗑️</span> حذف عنصر: تحديد النص ← مفتاح Delete</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==================== مايكروسوفت إكسل ==================== -->
+  <div class="section" id="excel" data-theme="gold">
+    <div class="section-header">
+      <div class="badge" style="background:rgba(255,209,102,0.15);color:var(--accent-gold);">تطبيقات الحاسب</div>
+      <h2 style="color:var(--accent-gold);">مايكروسوفت إكسل (Excel)</h2>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>📊 إنشاء مصنف وحفظه</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-content">
+        <ul class="info-list">
+          <li><span class="li-icon">1️⃣</span> ملف ← إنشاء مصنف جديد ← اختيار قالب أو مصنف فارغ</li>
+          <li><span class="li-icon">2️⃣</span> إدخال البيانات والمعلومات في الخلايا</li>
+          <li><span class="li-icon">3️⃣</span> ملف ← حفظ ك ← اختيار المجلد والاسم</li>
+          <li><span class="li-icon">4️⃣</span> اختيار التنسيق: .xlsx (حديث) أو .xls (قديم 97-2003)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>✏️ تعبئة أوراق العمل</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-content">
+        <ul class="info-list">
+          <li><span class="li-icon">📝</span> اختيار الصفحة (Worksheet) ← النقر على الخلية المطلوبة ← بدء الكتابة</li>
+          <li><span class="li-icon">↩️</span> الضغط على Enter للانتقال للخلية التالية</li>
+          <li><span class="li-icon">➕</span> النقر على علامة "+" لإضافة صفحات عمل جديدة</li>
+          <li><span class="li-icon">🎨</span> تنسيق البيانات: تغيير الخطوط، تلوين الخلفية، تحديد الحدود، إضافة صيغ</li>
+          <li><span class="li-icon">💾</span> حفظ: ملف ← حفظ ك ← اختيار .xlsx ← حفظ</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>📂 إدارة أوراق العمل</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-content">
+        <ul class="info-list">
+          <li><span class="li-icon">📄</span> إنشاء ورقة جديدة: ملف ← إنشاء ورقة عمل جديدة</li>
+          <li><span class="li-icon">📏</span> إضافة صفوف/أعمدة: كليك يمين على الرأس ← إضافة صف/عمود</li>
+          <li><span class="li-icon">🔢</span> الوظائف المدمجة: SUM (الجمع)، AVERAGE (المتوسط)، COUNT (العدّ)</li>
+          <li><span class="li-icon">📊</span> إنشاء رسوم بيانية: تبويب "إدراج" ← اختيار نوع الرسم المناسب</li>
+          <li><span class="li-icon">💬</span> التعليقات وتتبع التغييرات: لمراجعة وتوثيق البيانات</li>
+          <li><span class="li-icon">📤</span> الاستيراد والتصدير: من/إلى CSV أو PDF أو مصادر أخرى</li>
+          <li><span class="li-icon">🖨️</span> التصدير والطباعة: طباعة ورقة العمل أو تصديرها لملف PDF</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>📋 إدارة البيانات</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-content">
+        <ul class="info-list">
+          <li><span class="li-icon">🔽</span> <strong>التصفية:</strong> كليك على رأس العمود ← "تصفية" لعرض بيانات بمعايير محددة</li>
+          <li><span class="li-icon">🔀</span> <strong>الفرز:</strong> ترتيب تصاعدي أو تنازلي حسب قيم العمود</li>
+          <li><span class="li-icon">➕</span> <strong>الحسابات:</strong> استخدام الصيغ مثل SUM وAVERAGE وCOUNT</li>
+          <li><span class="li-icon">📈</span> <strong>الرسوم البيانية:</strong> تبويب "إدراج" ← اختيار نوع الرسم</li>
+          <li><span class="li-icon">🔄</span> <strong>الجداول الدورية (Pivot Tables):</strong> لتحليل واستخلاص المعلومات</li>
+          <li><span class="li-icon">🔐</span> <strong>الحماية:</strong> حماية الورقة أو الخلايا بكلمة مرور</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>🎨 تنسيق ورقة العمل</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-content">
+        <ul class="info-list">
+          <li><span class="li-icon">🎨</span> تلوين الخلفية وتغيير لون الخطوط</li>
+          <li><span class="li-icon">📐</span> إضافة حدود حول الخلايا: تنسيق ← تنسيق الحدود</li>
+          <li><span class="li-icon">📊</span> التنسيق المشروط: تغيير الألوان بناءً على القيم</li>
+          <li><span class="li-icon">🎯</span> الشرائط اللونية لتنسيقات سريعة</li>
+          <li><span class="li-icon">🔘</span> إضافة أزرار وشرائط تفاعلية من تبويب "التطوير"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>🖨️ طباعة المصنف</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-content">
+        <ul class="info-list">
+          <li><span class="li-icon">📋</span> تحديد منطقة الطباعة بالسحب والتحديد</li>
+          <li><span class="li-icon">⚙️</span> تخصيص: اختيار الطابعة، عدد النسخ، الاتجاه، الحجم</li>
+          <li><span class="li-icon">👁️</span> زر "معاينة" لرؤية الشكل قبل الطباعة</li>
+          <li><span class="li-icon">📤</span> خيارات: طباعة على الوجهين، نطاق صفحات محدد</li>
+          <li><span class="li-icon">💾</span> يمكن التصدير لـ PDF أو CSV</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    ملخص شامل لمواد دبلوم الأمن السيبراني – معهد ماز العالي للتدريب<br>
+    <span style="opacity:0.5;">تم إنشاء هذا الملخص التفاعلي للمراجعة والتحضير للاختبار الشامل</span>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  // Direct binding to each nav tab button - most reliable on iOS
+  var tabs = document.querySelectorAll('.nav-tab');
+  for (var i = 0; i < tabs.length; i++) {
+    (function(btn) {
+      function handleTab(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        var tabId = btn.getAttribute('data-tab');
+        if (!tabId) return;
+        
+        // Remove active from all
+        var allSections = document.querySelectorAll('.section');
+        for (var j = 0; j < allSections.length; j++) allSections[j].classList.remove('active');
+        var allTabs = document.querySelectorAll('.nav-tab');
+        for (var j = 0; j < allTabs.length; j++) allTabs[j].classList.remove('active');
+        
+        // Activate selected
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+        
+        // Scroll to content
+        setTimeout(function() {
+          var target = document.getElementById(tabId);
+          if (target) {
+            var y = target.getBoundingClientRect().top + window.pageYOffset - 80;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        }, 50);
+      }
+      
+      btn.addEventListener('touchend', handleTab, { passive: false });
+      btn.addEventListener('click', handleTab, false);
+    })(tabs[i]);
+  }
+
+  // Direct binding to each accordion header
+  var headers = document.querySelectorAll('.accordion-header');
+  for (var i = 0; i < headers.length; i++) {
+    (function(header) {
+      function handleAccordion(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        var item = header.parentElement;
+        var section = item.closest('.section');
+        var wasOpen = item.classList.contains('open');
+        
+        var items = section.querySelectorAll('.accordion-item');
+        for (var j = 0; j < items.length; j++) items[j].classList.remove('open');
+        if (!wasOpen) item.classList.add('open');
+      }
+      
+      header.addEventListener('touchend', handleAccordion, { passive: false });
+      header.addEventListener('click', handleAccordion, false);
+    })(headers[i]);
+  }
+
+  // Progress bar
+  window.addEventListener('scroll', function() {
+    var scrollTop = window.scrollY || window.pageYOffset;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    document.getElementById('progressBar').style.width = progress + '%';
+  }, { passive: true });
+
+  // Animate cards on scroll
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) {
+          entries[i].target.style.opacity = '1';
+          entries[i].target.style.transform = 'translateY(0)';
+        }
+      }
+    }, { threshold: 0.1 });
+
+    var cards = document.querySelectorAll('.card, .accordion-item');
+    for (var i = 0; i < cards.length; i++) {
+      cards[i].style.opacity = '0';
+      cards[i].style.transform = 'translateY(20px)';
+      cards[i].style.transition = 'all 0.6s ease';
+      observer.observe(cards[i]);
+    }
+  }
+})();
+</script>
+</body>
+</html>
